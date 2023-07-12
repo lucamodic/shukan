@@ -14,12 +14,15 @@ public class Usuario {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	// para el resto de los atributo no se usan anotaciones entonces se usa el default de hibernate: la columna se llama igual que
-	// el atributo, la misma admite nulos, y el tipo de dato se deduce del tipo de dato de java.
 	private String usuario;
 	private String email;
 	private String password;
-	private String fotoPerfil = "../webapp/images/default.jpg";
+	private String fotoPerfil = "images/default.jpg";
+	private Integer totalHealth = 100;
+	private Integer actualHealth = 100;
+	private Integer totalExp = 100;
+	private Integer actualExp = 0;
+	private Integer Streak = 0;
 
 	public Long getId() {
 		return id;
@@ -53,4 +56,43 @@ public class Usuario {
 		this.fotoPerfil = fotoPerfil;
 	}
 
+	public Integer getTotalHealth() {
+		return totalHealth;
+	}
+
+	public void setTotalHealth(Integer totalHealth) {
+		this.totalHealth = totalHealth;
+	}
+
+	public Integer getActualHealth() {
+		return actualHealth;
+	}
+
+	public void setActualHealth(Integer actualHealth) {
+		this.actualHealth = actualHealth;
+	}
+
+	public Integer getTotalExp() {
+		return totalExp;
+	}
+
+	public void setTotalExp(Integer totalExp) {
+		this.totalExp = totalExp;
+	}
+
+	public Integer getActualExp() {
+		return actualExp;
+	}
+
+	public void setActualExp(Integer actualExp) {
+		this.actualExp = actualExp;
+	}
+
+	public Integer getStreak() {
+		return Streak;
+	}
+
+	public void setStreak(Integer streak) {
+		Streak = streak;
+	}
 }

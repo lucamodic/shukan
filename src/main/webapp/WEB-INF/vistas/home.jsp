@@ -23,7 +23,7 @@
 				<div class="barras">
 					<div class="vida-total divs-barras">
 						<div class="vida-actual divs-barras">
-							<h4 class="vida-texto">x/y</h4>
+							<h4 class="vida-texto">${usuario.actualHealth}/${usuario.totalHealth}</h4>
 						</div>
 					</div>
 				</div>
@@ -31,7 +31,7 @@
 				<div class="barras">
 					<div class="nivel-total divs-barras">
 						<div class="nivel-actual divs-barras">
-							<h4 class="nivel-texto">x/y</h4>
+							<h4 class="nivel-texto">${usuario.actualExp}/${usuario.totalExp}</h4>
 						</div>
 					</div>
 				</div>
@@ -49,7 +49,7 @@
 				<div class="card">
 					<h3 class="titulo titulo-card">Tasks</h3>
 					<div>
-						<button class="btn-add"> <img src="images/hand.png" class="hand"/> Add task</button>
+						<button class="btn-add add-task"> <img src="images/hand.png" class="hand"/> Add task</button>
 					</div>
 				</div>
 			</div>
@@ -73,8 +73,86 @@
 		</div>
 	</div>
 
+
+
+
+	<dialog class="modal-tasks modal">
+		<div>
+			<h3 class="titulo titulo-card">Add Task</h3>
+			<button class="close">X</button>
+		</div>
+		<form:form class="midclass" action="save-task" method="POST" modelAttribute="goal">
+			<label class="titulos" for="goal">Name</label>
+			<form:input placeholder="Do laundry" path="name" type="text" id="name" class="margin" />
+			<label class="titulos" for="goal">Description</label>
+			<form:input placeholder="Do laundry and iron it" path="description" type="text" id="description" class="margin" />
+			<label class="titulos" for="goal">Experience</label>
+			<form:input placeholder="30" path="experience" type="number" id="experience" class="margin" />
+			<label class="titulos" for="goal">Damage</label>
+			<form:input placeholder="30" path="damage" type="number" id="damage" class="margin" />
+			<label class="titulos" for="goal">Damage</label>
+			<form:input placeholder="5" path="damage" type="number" id="damage" class="margin" />
+			<label class="titulos" for="goal">How long to complete</label>
+			<form:input placeholder="3 (1-7 Days)" path="limitDate" type="number" id="limitDate" class="margin" />
+			<button id="btn-save-task" class="save"
+					Type="submit">Save</button>
+		</form:form>
+	</dialog>
+
+	<dialog class="modal-missions modal">
+		<div>
+			<h3 class="titulo titulo-card">Add Mission</h3>
+			<button class="close">X</button>
+		</div>
+		<form:form class="midclass" action="save-task" method="POST" modelAttribute="goal">
+			<label class="titulos" for="goal">Name</label>
+			<form:input placeholder="Do laundry" path="name" type="text" id="name" class="margin" />
+			<label class="titulos" for="goal">Description</label>
+			<form:input placeholder="Do laundry and iron it" path="description" type="text" id="description" class="margin" />
+			<label class="titulos" for="goal">Experience</label>
+			<form:input placeholder="30" path="experience" type="number" id="experience" class="margin" />
+			<label class="titulos" for="goal">Damage</label>
+			<form:input placeholder="30" path="damage" type="number" id="damage" class="margin" />
+			<label class="titulos" for="goal">Damage</label>
+			<form:input placeholder="5" path="damage" type="number" id="damage" class="margin" />
+			<label class="titulos" for="goal">How long to complete</label>
+			<form:input placeholder="11 (8 + Days)" path="limitDate" type="number" id="limitDate" class="margin" />
+			<button id="btn-save-task" class="save"
+					Type="submit">Save</button>
+		</form:form>
+	</dialog>
+
+	<dialog class="modal-habits modal">
+		<div>
+			<h3 class="titulo titulo-card">Add Habit</h3>
+			<button class="close">X</button>
+		</div>
+		<form:form class="midclass" action="save-task" method="POST" modelAttribute="goal">
+			<label class="titulos" for="goal">Name</label>
+			<form:input placeholder="Do laundry" path="name" type="text" id="name" class="margin" />
+			<label class="titulos" for="goal">Description</label>
+			<form:input placeholder="Do laundry and iron it" path="description" type="text" id="description" class="margin" />
+			<label class="titulos" for="goal">Experience</label>
+			<form:input placeholder="30" path="experience" type="number" id="experience" class="margin" />
+			<label class="titulos" for="goal">Damage</label>
+			<form:input placeholder="30" path="damage" type="number" id="damage" class="margin" />
+			<label class="titulos" for="goal">Damage</label>
+			<form:input placeholder="5" path="damage" type="number" id="damage" class="margin" />
+			<h4>Habits are checked everyday</h4>
+			<button id="btn-save-task" class="save"
+					Type="submit">Save</button>
+		</form:form>
+	</dialog>
+
+
+
+
+
+
+
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" ></script>
 	<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')
 	</script>
+	<script src="js/home.js" type="text/javascript"></script>
 </body>
 </html>
