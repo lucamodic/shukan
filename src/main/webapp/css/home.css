@@ -1,0 +1,149 @@
+* {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #1C1C1C;
+    font-family: 'Playfair Display', serif;
+    color: #FFFFFF;
+    font-weight:bold;
+}
+
+.columnas {
+    display:flex;
+    flex-direction: column;
+}
+
+.rodeado {
+    height:100vh;
+    display:flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.parte-arriba {
+    height:40vh;
+    margin-bottom: 15px;
+}
+
+.parte-abajo {
+    height:40vh;
+}
+
+.titulo {
+    font-size:1.7rem;
+}
+
+.imagenPf {
+    height:100%;
+    width:100%;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+.pfp {
+    height:300px;
+    width:300px;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+.p1 {
+    margin:2rem 0rem;
+}
+
+.divs-barras {
+    border-radius:15px;
+    margin:10px 0px 15px 0px;
+}
+
+.vida-total {
+    height:25px;
+    width: 100%;
+    background-color: #575757;
+}
+
+.vida-actual {
+    height:25px;
+    width: 75%;
+    background-color: #D45A5A;
+}
+
+.vida-texto {
+    position:relative;
+    left:60%;
+}
+
+.nivel-total {
+    height:25px;
+    width: 100%;
+    background-color: #575757;
+}
+
+.nivel-actual {
+    height:25px;
+    width: 75%;
+    background-color: #D45A5A;
+}
+
+.nivel-texto {
+    position:relative;
+    left:60%;
+}
+
+.streak {
+    display:flex;
+    flex-direction: column;
+}
+
+.streak-inside {
+    margin-bottom: 10px;
+    display: inline-flex;
+    align-items: center;
+}
+
+.streak-img {
+    width:32px;
+    height:32px;
+    margin-left:10px;
+}
+
+.username {
+    margin-bottom: 10px;
+}
+
+.card {
+    background-color: #252525;
+    width:325px;
+    height:99%;
+    border-radius:15px;
+    box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.3);
+
+}
+
+.titulo-card {
+    padding:10px 15px;
+    margin-bottom:15px;
+}
+
+.hand {
+    width:24px;
+    height:27px;
+    margin-right:10px;
+}
+
+.btn-add {
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    color:white;
+    text-align: center;
+    font-size:22px;
+    display: inline-flex;
+    align-items: center;
+    margin-left:15px;
+}
