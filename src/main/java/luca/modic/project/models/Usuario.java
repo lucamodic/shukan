@@ -23,6 +23,15 @@ public class Usuario {
 	private Integer totalExp = 100;
 	private Integer actualExp = 0;
 	private Integer Streak = 0;
+	private Integer level = 1;
+
+	public Integer getLevel() {
+		return level;
+	}
+
+	public void setLevel(Integer level) {
+		this.level = level;
+	}
 
 	public Long getId() {
 		return id;

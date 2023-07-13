@@ -1,5 +1,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,7 +28,7 @@
 						</div>
 					</div>
 				</div>
-				<h3 class="titulo">Level X</h3>
+				<h3 class="titulo">Level ${usuario.level}</h3>
 				<div class="barras">
 					<div class="nivel-total divs-barras">
 						<div class="nivel-actual divs-barras">
@@ -48,6 +49,9 @@
 			<div class="parte-arriba">
 				<div class="card">
 					<h3 class="titulo titulo-card">Tasks</h3>
+					<div class="tasks-on">
+
+					</div>
 					<div>
 						<button class="btn-add add-task"> <img src="images/hand.png" class="hand"/> Add task</button>
 					</div>
@@ -82,65 +86,19 @@
 			<button class="close">X</button>
 		</div>
 		<form:form class="midclass" action="save-task" method="POST" modelAttribute="goal">
-			<label class="titulos" for="goal">Name</label>
+			<label class="titulos" for="name">Name</label>
 			<form:input placeholder="Do laundry" path="name" type="text" id="name" class="margin" />
-			<label class="titulos" for="goal">Description</label>
+			<label class="titulos" for="description">Description</label>
 			<form:input placeholder="Do laundry and iron it" path="description" type="text" id="description" class="margin" />
-			<label class="titulos" for="goal">Experience</label>
+			<label class="titulos" for="experience">Experience</label>
 			<form:input placeholder="30" path="experience" type="number" id="experience" class="margin" />
-			<label class="titulos" for="goal">Damage</label>
-			<form:input placeholder="30" path="damage" type="number" id="damage" class="margin" />
-			<label class="titulos" for="goal">Damage</label>
+			<label class="titulos" for="damage">Damage</label>
 			<form:input placeholder="5" path="damage" type="number" id="damage" class="margin" />
-			<label class="titulos" for="goal">How long to complete</label>
+			<label class="titulos" for="limitDate">How long to complete</label>
 			<form:input placeholder="3 (1-7 Days)" path="limitDate" type="number" id="limitDate" class="margin" />
 			<button id="btn-save-task" class="save"
 					Type="submit">Save</button>
-		</form:form>
-	</dialog>
-
-	<dialog class="modal-missions modal">
-		<div>
-			<h3 class="titulo titulo-card">Add Mission</h3>
-			<button class="close">X</button>
-		</div>
-		<form:form class="midclass" action="save-task" method="POST" modelAttribute="goal">
-			<label class="titulos" for="goal">Name</label>
-			<form:input placeholder="Do laundry" path="name" type="text" id="name" class="margin" />
-			<label class="titulos" for="goal">Description</label>
-			<form:input placeholder="Do laundry and iron it" path="description" type="text" id="description" class="margin" />
-			<label class="titulos" for="goal">Experience</label>
-			<form:input placeholder="30" path="experience" type="number" id="experience" class="margin" />
-			<label class="titulos" for="goal">Damage</label>
-			<form:input placeholder="30" path="damage" type="number" id="damage" class="margin" />
-			<label class="titulos" for="goal">Damage</label>
-			<form:input placeholder="5" path="damage" type="number" id="damage" class="margin" />
-			<label class="titulos" for="goal">How long to complete</label>
-			<form:input placeholder="11 (8 + Days)" path="limitDate" type="number" id="limitDate" class="margin" />
-			<button id="btn-save-task" class="save"
-					Type="submit">Save</button>
-		</form:form>
-	</dialog>
-
-	<dialog class="modal-habits modal">
-		<div>
-			<h3 class="titulo titulo-card">Add Habit</h3>
-			<button class="close">X</button>
-		</div>
-		<form:form class="midclass" action="save-task" method="POST" modelAttribute="goal">
-			<label class="titulos" for="goal">Name</label>
-			<form:input placeholder="Do laundry" path="name" type="text" id="name" class="margin" />
-			<label class="titulos" for="goal">Description</label>
-			<form:input placeholder="Do laundry and iron it" path="description" type="text" id="description" class="margin" />
-			<label class="titulos" for="goal">Experience</label>
-			<form:input placeholder="30" path="experience" type="number" id="experience" class="margin" />
-			<label class="titulos" for="goal">Damage</label>
-			<form:input placeholder="30" path="damage" type="number" id="damage" class="margin" />
-			<label class="titulos" for="goal">Damage</label>
-			<form:input placeholder="5" path="damage" type="number" id="damage" class="margin" />
-			<h4>Habits are checked everyday</h4>
-			<button id="btn-save-task" class="save"
-					Type="submit">Save</button>
+			<h4>${error}</h4>
 		</form:form>
 	</dialog>
 

@@ -2,6 +2,7 @@ package luca.modic.project.controllers;
 
 import luca.modic.project.exceptions.*;
 import luca.modic.project.models.DatosLogin;
+import luca.modic.project.models.Goal;
 import luca.modic.project.models.Usuario;
 import luca.modic.project.services.ServicioLogin;
 import luca.modic.project.services.ServicioUsuario;
@@ -95,8 +96,12 @@ public class ControladorLogin {
 		Usuario usuario = this.servicioUsuario.buscar((Long) request.getSession().getAttribute("id"));
 		ModelMap model = new ModelMap();
 		model.put("usuario", usuario);
+		model.put ("goal", new Goal());
 		return new ModelAndView("home", model);
 	}
+
+
+
 
 	@RequestMapping(path = "/", method = RequestMethod.GET)
 	public ModelAndView inicio() {

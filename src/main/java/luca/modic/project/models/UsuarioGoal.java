@@ -3,6 +3,7 @@ package luca.modic.project.models;
 import javax.persistence.*;
 import java.time.LocalDate;
 
+@Entity
 public class UsuarioGoal {
 
     @Id
@@ -15,7 +16,14 @@ public class UsuarioGoal {
     private Goal goal;
     private LocalDate finishingDate;
 
+    public UsuarioGoal() {
+    }
 
+    public UsuarioGoal(Goal goal, Usuario usuario, LocalDate finishingDate) {
+        this.goal = goal;
+        this.usuario = usuario;
+        this.finishingDate = finishingDate;
+    }
 
     public Long getId() {
         return id;
