@@ -11,6 +11,17 @@ body {
     font-weight:bold;
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
 .columnas {
     display:flex;
     flex-direction: column;
@@ -24,16 +35,16 @@ body {
 }
 
 .parte-arriba {
-    height:40vh;
+    height:43vh;
     margin-bottom: 15px;
 }
 
 .parte-abajo {
-    height:40vh;
+    height:43vh;
 }
 
 .titulo {
-    font-size:1.7rem;
+    font-size:1.3rem;
 }
 
 .imagenPf {
@@ -44,8 +55,8 @@ body {
 }
 
 .pfp {
-    height:300px;
-    width:300px;
+    height:250px;
+    width:250px;
     border:none;
     border-radius:5px;
     cursor:pointer;
@@ -64,6 +75,7 @@ body {
     height:25px;
     width: 100%;
     background-color: #575757;
+    position:relative;
 }
 
 .vida-actual {
@@ -73,11 +85,13 @@ body {
 }
 
 .vida-texto {
-    position:relative;
-    left:60%;
+    position:absolute;
+    left:43.5%;
+    top:0px;
 }
 
 .nivel-total {
+    position:relative;
     height:25px;
     width: 100%;
     background-color: #575757;
@@ -90,8 +104,9 @@ body {
 }
 
 .nivel-texto {
-    position:relative;
-    left:60%;
+    position:absolute;
+    left:43.5%;
+    top:0px;
 }
 
 .streak {
@@ -117,7 +132,7 @@ body {
 
 .card {
     background-color: #252525;
-    width:325px;
+    width:300px;
     height:99%;
     border-radius:15px;
     box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.3);
@@ -126,7 +141,7 @@ body {
 
 .titulo-card {
     padding:10px 15px;
-    margin-bottom:15px;
+    margin-bottom:10px;
 }
 
 .hand {
@@ -156,6 +171,120 @@ body {
 .modal {
     position: fixed;
     top: 50%;
-    left: 50%;
+    left: 49.4%;
     transform: translate(-50%, -50%);
+    width:18vw;
+    background-color: #2C2C2C;
+    color:white;
+    border:none;
+    border-radius:15px;
+}
+
+.title-modal {
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left:8px;
+}
+
+.close {
+    margin:0px 15px 0px 0px;
+    border:none;
+    border-bottom: 1px solid white;
+    border-left: 1px solid white;
+    border-radius:25%;
+    padding:10px 12px;
+    background-color: transparent;
+    color:white;
+}
+
+.close:hover {
+    cursor:pointer;
+    background-color: #383838;
+    transition:ease-in;
+    transition-duration: 0.3s;
+}
+
+.midclass{
+    display:flex;
+    flex-direction:column;
+    text-align: left;
+    margin-left:8px;
+}
+
+.fields {
+    width:13vw;
+    padding:5px;
+    margin:5px 0px 18px 0.7vw ;
+    background:none;
+    border:none;
+    font-size:16px;
+    border-bottom: white 1px solid ;
+    color:white;
+}
+
+.titulos {
+    margin:0px 0px 0px 1vw ;
+    font-size:21px;
+}
+
+#btn-save-task {
+    background-color: #604576;
+    border:none;
+    border-radius:15px;
+    width:5vw;
+    height:4vh;
+    font-size:20px;
+    color:white;
+    margin:3vh 0px 2.5vh 10px;
+}
+
+#btn-save-task:hover {
+    cursor:pointer;
+    background-color: #9473b0;
+    transition:ease-in;
+    transition-duration: 0.3s;
+}
+
+.tasks-on{
+    height:70%;
+    overflow-y:scroll;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    margin-bottom:8px;
+}
+
+.goal-name {
+    margin: 1px 15px;
+    margin-bottom: 15px;
+}
+.task-not-finished {
+    text-decoration: 2px #f84545 line-through;
+}
+
+.task-finished {
+    text-decoration: 2px #69ff6e line-through;
+}
+
+::-webkit-scrollbar {
+    width: 7px;
+    padding:5px;
+}
+::-webkit-scrollbar-track {
+    background: rgb(130, 99, 167);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgb(220, 192, 255);
+}
+
+.error {
+    margin-bottom:20px;
+    font-size:20px !important;
+}
+
+.finished-goals {
+    overflow-y:scroll;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
 }

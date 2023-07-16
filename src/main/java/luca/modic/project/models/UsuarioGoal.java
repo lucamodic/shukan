@@ -10,19 +10,20 @@ public class UsuarioGoal {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Usuario usuario;
     @ManyToOne
     private Goal goal;
     private LocalDate finishingDate;
 
-    public UsuarioGoal() {
-    }
-
     public UsuarioGoal(Goal goal, Usuario usuario, LocalDate finishingDate) {
         this.goal = goal;
         this.usuario = usuario;
         this.finishingDate = finishingDate;
+    }
+
+    public UsuarioGoal() {
+
     }
 
     public Long getId() {

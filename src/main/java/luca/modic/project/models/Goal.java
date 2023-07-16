@@ -18,7 +18,8 @@ public class Goal {
     private Integer damage;
     private Integer limitDate;
     private TypeOfGoal type;
-
+    private Boolean hecho = false;
+    private Boolean activado = false;
 
     public Long getId() {
         return id;
@@ -74,5 +75,21 @@ public class Goal {
 
     public void setType(TypeOfGoal type) {
         this.type = type;
+    }
+
+    public Boolean getHecho() {
+        return hecho;
+    }
+
+    public void setHecho(Boolean hecho) {
+        this.hecho = hecho;
+    }
+
+    public Boolean getActivado() {
+        return activado;
+    }
+
+    public void setActivado(Boolean activado) {
+        this.activado = activado;
     }
 }

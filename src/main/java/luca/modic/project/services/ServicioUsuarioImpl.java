@@ -1,6 +1,8 @@
 package luca.modic.project.services;
 
+import luca.modic.project.models.Goal;
 import luca.modic.project.models.Usuario;
+import luca.modic.project.repositories.RepositorioGoal;
 import luca.modic.project.repositories.RepositorioUsuario;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,15 +15,24 @@ import javax.transaction.Transactional;
 public class ServicioUsuarioImpl implements ServicioUsuario{
 
     private RepositorioUsuario repositorioUsuario;
+    private RepositorioGoal repositorioGoal;
 
     @Autowired
-    public ServicioUsuarioImpl(RepositorioUsuario repositorioUsuario){
+    public ServicioUsuarioImpl(RepositorioUsuario repositorioUsuario, RepositorioGoal repositorioGoal){
         this.repositorioUsuario = repositorioUsuario;
+        this.repositorioGoal = repositorioGoal;
     }
 
     @Override
     public Usuario buscar(Long id) {
         return this.repositorioUsuario.buscar(id);
+    }
+
+    @Override
+    public void darNivel(Usuario usuario, Long id) {
+        Goal goal = this.repositorioGoal.buscar(id);
+        usuario.setActualExp(usuario.getActualExp() + goal.getExperience());
+        this.repositorioUsuario.modificar(usuario);
     }
 
 }

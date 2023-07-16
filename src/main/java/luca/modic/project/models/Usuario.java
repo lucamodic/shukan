@@ -25,6 +25,7 @@ public class Usuario {
 	private Integer Streak = 0;
 	private Integer level = 1;
 
+	private Boolean streakToday = false;
 	public Integer getLevel() {
 		return level;
 	}
@@ -103,5 +104,13 @@ public class Usuario {
 
 	public void setStreak(Integer streak) {
 		Streak = streak;
+	}
+
+	public Boolean getStreakToday() {
+		return streakToday;
+	}
+
+	public void setStreakToday(Boolean streakToday) {
+		this.streakToday = streakToday;
 	}
 }

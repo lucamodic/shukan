@@ -21,4 +21,19 @@ public class RepositorioGoalImpl implements RepositorioGoal {
     public void guardarGoal(Goal goal) {
         sessionFactory.getCurrentSession().save(goal);
     }
+
+    @Override
+    public void modificar(Goal goal) {
+        sessionFactory.getCurrentSession().update(goal);
+    }
+
+    @Override
+    public void borrar(Long id) {
+        this.sessionFactory.getCurrentSession().delete(this.buscar(id));
+    }
+
+    @Override
+    public Goal buscar(Long id) {
+        return this.sessionFactory.getCurrentSession().get(Goal.class, id);
+    }
 }

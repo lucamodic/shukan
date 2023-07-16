@@ -1,1 +1,1 @@
-Hola ${paramostrar}!
+Hola

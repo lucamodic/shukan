@@ -6,4 +6,5 @@ public interface ServicioUsuario {
 
     Usuario buscar(Long idUsuario);
 
+    void darNivel(Usuario usuario, Long id);
 }

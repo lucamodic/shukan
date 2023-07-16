@@ -4,6 +4,7 @@ import luca.modic.project.exceptions.*;
 import luca.modic.project.models.DatosLogin;
 import luca.modic.project.models.Goal;
 import luca.modic.project.models.Usuario;
+import luca.modic.project.services.ServicioGoal;
 import luca.modic.project.services.ServicioLogin;
 import luca.modic.project.services.ServicioUsuario;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,16 +19,20 @@ import org.springframework.web.servlet.ModelAndView;
 import static javax.swing.JOptionPane.showMessageDialog;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Controller
 public class ControladorLogin {
 
 	private ServicioLogin servicioLogin;
 	private ServicioUsuario servicioUsuario;
+	private ServicioGoal servicioGoal;
+
 	@Autowired
-	public ControladorLogin(ServicioLogin servicioLogin, ServicioUsuario servicioUsuario){
+	public ControladorLogin(ServicioLogin servicioLogin, ServicioUsuario servicioUsuario, ServicioGoal servicioGoal){
 		this.servicioLogin = servicioLogin;
 		this.servicioUsuario = servicioUsuario;
+		this.servicioGoal = servicioGoal;
 	}
 
 	@RequestMapping("/login")
@@ -94,7 +99,9 @@ public class ControladorLogin {
 		if (request.getSession().getAttribute("usuario") == null)
 			return new ModelAndView("redirect:/login");
 		Usuario usuario = this.servicioUsuario.buscar((Long) request.getSession().getAttribute("id"));
+		List<Goal> goals = this.servicioGoal.getGoalsById(usuario.getId());
 		ModelMap model = new ModelMap();
+		model.put("goals", goals);
 		model.put("usuario", usuario);
 		model.put ("goal", new Goal());
 		return new ModelAndView("home", model);
