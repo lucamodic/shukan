@@ -32,7 +32,22 @@ public class ServicioUsuarioImpl implements ServicioUsuario{
     public void darNivel(Usuario usuario, Long id) {
         Goal goal = this.repositorioGoal.buscar(id);
         usuario.setActualExp(usuario.getActualExp() + goal.getExperience());
+        checkExp(usuario);
         this.repositorioUsuario.modificar(usuario);
+    }
+
+    private void checkExp(Usuario usuario) {
+        if(usuario.getActualExp() >= usuario.getTotalExp()){
+            usuario.setActualHealth(100);
+            usuario.setLevel(usuario.getLevel() + 1);
+            usuario.setActualExp(usuario.getActualExp() - usuario.getTotalExp());
+            usuario.setTotalExp(usuario.getTotalExp() * 2);
+        }
+    }
+
+    @Override
+    public void eliminar(Usuario usuario) {
+        this.repositorioUsuario.eliminar(usuario);
     }
 
 }

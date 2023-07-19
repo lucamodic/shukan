@@ -1,5 +1,6 @@
 package luca.modic.project.controllers;
 
+import com.google.gson.Gson;
 import luca.modic.project.exceptions.*;
 import luca.modic.project.models.Goal;
 import luca.modic.project.models.TypeOfGoal;
@@ -36,6 +37,12 @@ public class ControladorHome {
         model.put("goals", goals);
         model.put("usuario", usuario);
         model.put ("goal", new Goal());
+
+        //
+        model.put("goalsJson", new Gson().toJson(goals));
+        model.put("usuarioJson", new Gson().toJson(usuario));
+        //
+
         try{
             this.servicioGoal.guardarTask(goal, usuario);
         } catch(CampoVacioException | DurationLessThanSeven e){
@@ -50,6 +57,12 @@ public class ControladorHome {
         ModelMap model = new ModelMap();
         Usuario usuario = this.servicioUsuario.buscar((Long) request.getSession().getAttribute("id"));
         List<Goal> goals = this.servicioGoal.getGoalsById(usuario.getId());
+
+        //
+        model.put("goalsJson", new Gson().toJson(goals));
+        model.put("usuarioJson", new Gson().toJson(usuario));
+        //
+
         model.put("goals", goals);
         model.put("usuario", usuario);
         model.put ("goal", new Goal());
@@ -67,6 +80,12 @@ public class ControladorHome {
         ModelMap model = new ModelMap();
         Usuario usuario = this.servicioUsuario.buscar((Long) request.getSession().getAttribute("id"));
         List<Goal> goals = this.servicioGoal.getGoalsById(usuario.getId());
+
+        //
+        model.put("goalsJson", new Gson().toJson(goals));
+        model.put("usuarioJson", new Gson().toJson(usuario));
+        //
+
         model.put("goals", goals);
         model.put("usuario", usuario);
         model.put ("goal", new Goal());
@@ -97,7 +116,38 @@ public class ControladorHome {
         if(this.servicioGoal.buscar(Long.parseLong(id)).getType() == TypeOfGoal.HABIT){
             this.servicioGoal.habitCheck(Long.parseLong(id));
         }
+    }
+    @RequestMapping("/gameover")
+    public ModelAndView gameover(HttpServletRequest request) {
+        Usuario usuario = this.servicioUsuario.buscar((Long) request.getSession().getAttribute("id"));
+        this.servicioUsuario.eliminar(usuario);
+        request.getSession().invalidate();
+        return new ModelAndView("redirect:/login");
+    }
 
+
+    @RequestMapping("/death")
+    public ModelAndView death(HttpServletRequest request) {
+        if (request.getSession().getAttribute("usuario") == null)
+            return new ModelAndView("redirect:/login");
+        Usuario usuario = this.servicioUsuario.buscar((Long) request.getSession().getAttribute("id"));
+        ModelMap model = new ModelMap();
+        if(usuario.getActualHealth() <= 0 ) {
+            model.put("errorDeath", "You died");
+        } else {
+            List<Goal> goals = this.servicioGoal.getGoalsById(usuario.getId());
+
+            //
+            model.put("goalsJson", new Gson().toJson(goals));
+            model.put("usuarioJson", new Gson().toJson(usuario));
+            //
+
+            model.put("goals", goals);
+            model.put("usuario", usuario);
+            model.put ("goal", new Goal());
+            return new ModelAndView("home", model);
+        }
+        return new ModelAndView("death", model);
     }
 
 }

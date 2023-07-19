@@ -1,6 +1,7 @@
 $(document).ready(function() {
 
 
+
     //allows showModal()
     $.fn.showModal = function() {
         el = $(this);
@@ -18,6 +19,8 @@ $(document).ready(function() {
         }
         return el;
     };
+
+    $(".modal-death").hide();
 
     if(!(Object.keys(errorTask).length === 0)){
         $(".modal-tasks").showModal();
@@ -45,20 +48,40 @@ $(document).ready(function() {
     })
 
     //closes mdoal
-    $(".close").click(function(){
-        $("dialog").close();
+    $(".close-task").click(function(){
+        $(".modal-tasks").close();
     })
+
+    $(".close-habit").click(function(){
+        $(".modal-habit").close();
+    })
+
+    $(".close-mission").click(function(){
+        $(".modal-mission").close();
+    })
+
+
 
     setInterval(() => {
         $(function() {
-            $(".vida-actual").width(vida + "%");
-            if((exp * expTotal / 100) >= 5){
-                $(".nivel-actual").width(exp * expTotal / 100 + "%");
-            } else {
-                $(".nivel-actual").width(0+"%");
+            if(usuarioJson.actualHealth >=5){
+                $("#vida-actual").addClass("transition");
+                $(".vida-actual").width(usuarioJson.actualHealth + "%");
             }
-        }, 6000);
+            nivel();
+        }, 600);
     })
+
+    function nivel(){
+        if((usuarioJson.actualExp * usuarioJson.totalExp / 100) < 5 && (usuarioJson.actualExp * usuarioJson.totalExp / 100) > 0){
+            $("#nivel-actual").addClass("transition");
+            $(".nivel-actual").width("4%");
+        }
+        if((usuarioJson.actualExp * usuarioJson.totalExp / 100) >= 5){
+            $("#nivel-actual").addClass("transition");
+            $(".nivel-actual").width(usuarioJson.actualExp * 100 / usuarioJson.totalExp + "%");
+        }
+    }
 
     $(document).on('click', '.borrar', function() {
         if (confirm("Are you sure?")) {
@@ -93,10 +116,23 @@ $(document).ready(function() {
                 /*/beforeSend: function() {
                 },*/
                 success: result => {
-                    $("#" + idGoal).addClass("task-finished")
-                    var html = $("#" + idGoal).outerHTML();
-                    $("."+ idGoal).remove();
-                    $(".finished").append(html);
+                    goalsJson.forEach(element => {
+                        if(element.id == idGoal){
+                            usuarioJson.actualExp = usuarioJson.actualExp + element.experience;
+                            nivel();
+                            $(".nivel-actual").width(usuarioJson.actualExp * 100 / usuarioJson.totalExp + "%");
+                            $(".nivel-texto").text(usuarioJson.actualExp + "/" + usuarioJson.totalExp);
+                            $("#" + idGoal).addClass("task-finished")
+                            var html = $("#" + idGoal).outerHTML();
+                            $("."+ idGoal).remove();
+                        }
+                        if(element.type == "MISSION"){
+                            $(".finished-missions").append(html);
+                        }
+                        else {
+                            $(".finished-tasks").append(html);
+                        }
+                    })
                     //ANIMACION NIVEL
                 }
                 /*error: function(err){
@@ -116,10 +152,18 @@ $(document).ready(function() {
             /*/beforeSend: function() {
             },*/
             success: result => {
-                $("#" + idGoal).addClass("task-finished")
-                var html = $("#" + idGoal).outerHTML();
-                $('.' + idGoal).remove();
-                $(".habits-finished").append(html);
+                goalsJson.forEach(element => {
+                        if(element.id == idGoal){
+                            usuarioJson.actualExp = usuarioJson.actualExp + element.experience;
+                            nivel();
+                            $(".nivel-actual").width(usuarioJson.actualExp * 100 / usuarioJson.totalExp + "%");
+                            $(".nivel-texto").text(usuarioJson.actualExp + "/" + usuarioJson.totalExp);
+                            $("#" + idGoal).addClass("task-finished")
+                            var html = $("#" + idGoal).outerHTML();
+                            $('.' + idGoal).remove();
+                            $(".finished-habits").append(html);
+                        }
+                })
             }
             /*error: function(err){
             }*/
@@ -129,5 +173,17 @@ $(document).ready(function() {
     jQuery.fn.outerHTML = function() {
         return jQuery('<div />').append(this.eq(0).clone()).html();
     };
+
+    $(".finish").mouseover(function(){
+        $(this).attr("src", "images/check.png");
+    }).mouseout(function(){
+        $(this).attr('src', "images/checkPurple.png");
+    });
+
+    $(".eliminate").mouseover(function(){
+        $(this).attr("src", "images/trashRed.png");
+    }).mouseout(function(){
+        $(this).attr('src', "images/trash.png");
+    });
 
 });

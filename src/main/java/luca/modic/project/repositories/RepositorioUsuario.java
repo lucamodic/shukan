@@ -14,4 +14,6 @@ public interface RepositorioUsuario {
 	Usuario buscarUsuarioPorUsername(String usuario);
 
 	Usuario buscar(Long idUsuario);
+
+    void eliminar(Usuario usuario);
 }

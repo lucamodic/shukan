@@ -123,18 +123,21 @@ public class ServicioGoalImpl implements ServicioGoal{
         habitTime();
         repositorioGoal.guardarGoal(goal);
         repositorioUsuarioGoal.guardar(new UsuarioGoal(goal, usuario, finishingDate));
+
     }
 
     @Override
-    @Scheduled (cron = "* * * * * *")
+    @Scheduled (cron = "0 * * * * *")
     public void habitTime(){
         List<UsuarioGoal> list = repositorioUsuarioGoal.getAllHabits();
         LocalDate now = LocalDate.now();
         for(UsuarioGoal usuarioGoal : list){
-            if(now.isAfter(usuarioGoal.getFinishingDate()) && !usuarioGoal.getGoal().getHecho() && !usuarioGoal.getGoal().getActivado()){
+            if(now.isAfter(usuarioGoal.getFinishingDate()) && !usuarioGoal.getGoal().getHecho()){
                 Usuario usuario = usuarioGoal.getUsuario();
                 usuario.setActualHealth(usuario.getActualHealth() - usuarioGoal.getGoal().getDamage());
                 usuario.setStreak(0);
+                usuarioGoal.setFinishingDate(LocalDate.now().plusDays(1));
+                repositorioUsuarioGoal.modificar(usuarioGoal);
                 repositorioUsuario.modificar(usuario);
             }
             if(now.isAfter(usuarioGoal.getFinishingDate()) && usuarioGoal.getGoal().getHecho()){
@@ -142,6 +145,7 @@ public class ServicioGoalImpl implements ServicioGoal{
                 goal.setHecho(false);
                 usuarioGoal.setFinishingDate(LocalDate.now().plusDays(1));
                 repositorioGoal.modificar(goal);
+                repositorioUsuarioGoal.modificar(usuarioGoal);
             }
         }
     }

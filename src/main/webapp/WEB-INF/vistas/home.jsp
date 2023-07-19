@@ -34,7 +34,7 @@
 				<h3 class="titulo">Health</h3>
 				<div class="barras">
 					<div class="vida-total divs-barras">
-						<div class="vida-actual divs-barras">
+						<div id="vida-actual" class="vida-actual divs-barras">
 
 						</div>
 						<h4 class="vida-texto">${usuario.actualHealth}/${usuario.totalHealth}</h4>
@@ -46,7 +46,7 @@
 				<h3 class="titulo">Level ${usuario.level}</h3>
 				<div class="barras">
 					<div class="nivel-total divs-barras">
-						<div class="nivel-actual divs-barras">
+						<div id="nivel-actual" class="nivel-actual divs-barras">
 							<h4 class="nivel-texto">${usuario.actualExp}/${usuario.totalExp}</h4>
 						</div>
 					</div>
@@ -57,7 +57,12 @@
 				<div class="streak">
 					<div class="streak-inside">
 						<h3 class="titulo">Streak</h3>
-						<img class="streak-img" src="images/firebw.png"/>
+						<c:if test="${usuario.streakToday}">
+							<img title="Habits done!" class="streak-img" src="images/fire5.png"/>
+						</c:if>
+						<c:if test="${!usuario.streakToday}">
+							<img title="Do your habits to keep the streak going!" class="streak-img" src="images/fire0.png"/>
+						</c:if>
 					</div>
 					<h3 class="titulo">${usuario.streak} Days</h3>
 				</div>
@@ -72,15 +77,19 @@
 					<h3 class="titulo titulo-card">Tasks</h3>
 					<div class="tasks-on">
 						<c:forEach items="${goals}" var="goal">
-
-							<c:if test="${goal.type == 'TASK' &&  goal.activado == false &&  goal.hecho == false}">
-								<button class="borrar ${goal.id}"
-										value="${goal.id}">Delete</button>
-								<h4 class="goal-name ${goal.id}" id="${goal.id}">${goal.name}</h4>
-								<button class="completar ${goal.id}"
-										value="${goal.id}">Finish</button>
-							</c:if>
-
+							<div class="goals">
+								<c:if test="${goal.type == 'TASK' &&  goal.activado == false &&  goal.hecho == false}">
+									<div class="container-goals">
+										<button class="completar ${goal.id} accion"
+												value="${goal.id}"><img src="images/checkPurple.png" class="icono finish"></button>
+										<div class="texto-goals">
+											<h4 class="goal-name ${goal.id}" id="${goal.id}">${goal.name}</h4>
+										</div>
+										<button class="borrar ${goal.id} accion"
+												value="${goal.id}"><img src="images/trash.png" class="icono eliminate"></button>
+									</div>
+								</c:if>
+							</div>
 						</c:forEach>
 					</div>
 					<div>
@@ -96,23 +105,19 @@
 					<h3 class="titulo titulo-card">Habits</h3>
 					<div class="tasks-on">
 						<c:forEach items="${goals}" var="goal">
-							<c:if test="${goal.type == 'HABIT' &&  goal.activado == false &&  goal.hecho == false}">
-								<button class="borrar ${goal.id}"
-										value="${goal.id}">Delete</button>
-								<h4 class="goal-name ${goal.id}" id="${goal.id}">${goal.name}</h4>
-								<button class="completar-habit ${goal.id}"
-										value="${goal.id}">Finish</button>
-							</c:if>
-
-						</c:forEach>
-						<c:forEach items="${goals}" var="goal">
-							<c:if test="${goal.type == 'HABIT' &&  goal.activado == false &&  goal.hecho == true}">
-								<div class="habits-finished">
-									<h4 class="goal-name ${goal.id} task-finished" id="${goal.id}">${goal.name}</h4>
-								</div>
-
-							</c:if>
-
+							<div class="goals">
+								<c:if test="${goal.type == 'HABIT' &&  goal.activado == false &&  goal.hecho == false}">
+									<div class="container-goals">
+										<button class="completar-habit ${goal.id} accion"
+												value="${goal.id}"><img src="images/checkPurple.png" class="icono finish"></button>
+										<div class="texto-goals">
+											<h4 class="goal-name ${goal.id}" id="${goal.id}">${goal.name}</h4>
+										</div>
+										<button class="borrar ${goal.id} accion"
+												value="${goal.id}"><img src="images/trash.png" class="icono eliminate"></button>
+									</div>
+								</c:if>
+							</div>
 						</c:forEach>
 					</div>
 					<div>
@@ -129,15 +134,19 @@
 				<h3 class="titulo titulo-card">Missions</h3>
 				<div class="tasks-on">
 					<c:forEach items="${goals}" var="goal">
-
-						<c:if test="${goal.type == 'MISSION' &&  goal.activado == false &&  goal.hecho == false}">
-							<button class="borrar ${goal.id}"
-									value="${goal.id}">Delete</button>
-							<h4 class="goal-name ${goal.id}" id="${goal.id}" value="${goal.experience}">${goal.name}</h4>
-							<button class="completar ${goal.id}"
-									value="${goal.id}">Finish</button>
-						</c:if>
-
+						<div class="goals">
+							<c:if test="${goal.type == 'MISSION' &&  goal.activado == false &&  goal.hecho == false}">
+								<div class="container-goals">
+									<button class="completar ${goal.id} accion"
+											value="${goal.id}"><img src="images/checkPurple.png" class="icono finish"></button>
+									<div class="texto-goals">
+										<h4 class="goal-name ${goal.id}" id="${goal.id}">${goal.name}</h4>
+									</div>
+									<button class="borrar ${goal.id} accion"
+											value="${goal.id}"><img src="images/trash.png" class="icono eliminate"></button>
+								</div>
+							</c:if>
+						</div>
 					</c:forEach>
 				</div>
 				<div>
@@ -150,11 +159,10 @@
 
 			<div class="parte-abajo">
 					<div class="card finished-goals">
-
 						<!-- FINISHED TASKS -->
 
 					<h3 class="titulo titulo-card">Finished Tasks</h3>
-					<div class="finished">
+					<div class="finished finished-tasks">
 						<c:forEach items="${goals}" var="goal">
 
 							<c:if test="${goal.type == 'TASK' && goal.activado}">
@@ -170,7 +178,7 @@
 						<!-- FINISHED  MISSIONS -->
 
 					<h3 class="titulo titulo-card">Finished Missions</h3>
-					<div class="finished">
+					<div class="finished finished-mission">
 						<c:forEach items="${goals}" var="goal">
 
 							<c:if test="${goal.type == 'MISSION' && goal.activado}">
@@ -182,7 +190,19 @@
 
 						</c:forEach>
 					</div>
+
+
+						<h3 class="titulo titulo-card">Finished Habits</h3>
+						<div class="finished finished-habits">
+							<c:forEach items="${goals}" var="goal">
+								<c:if test="${goal.type == 'HABIT' && goal.hecho}">
+									<h4 class="goal-name task-finished">${goal.name}</h4>
+								</c:if>
+
+							</c:forEach>
+						</div>
 				</div>
+
 			</div>
 		</div>
 	</div>
@@ -193,7 +213,7 @@
 		<div class="title-modal">
 			<h3 class="titulo titulo-card">Add Task</h3>
 
-			<button class="close">&#10006;</button>
+			<button class="close-task close">&#10006;</button>
 		</div>
 		<form:form class="midclass" action="save-task" method="POST" modelAttribute="goal">
 			<label class="titulos" for="name">Name</label>
@@ -221,7 +241,7 @@
 		<div class="title-modal">
 			<h3 class="titulo titulo-card">Add Mission</h3>
 
-			<button class="close">&#10006;</button>
+			<button class="close-mission close">&#10006;</button>
 		</div>
 		<form:form class="midclass" action="save-mission" method="POST" modelAttribute="goal">
 			<label class="titulos" for="name">Name</label>
@@ -249,7 +269,7 @@
 		<div class="title-modal">
 			<h3 class="titulo titulo-card">Add Habit</h3>
 
-			<button class="close">&#10006;</button>
+			<button class="close-habit close">&#10006;</button>
 		</div>
 		<form:form class="midclass" action="save-habit" method="POST" modelAttribute="goal">
 			<label class="titulos" for="name">Name</label>
@@ -279,6 +299,9 @@
 		var vida = ${usuario.actualHealth};
 		var exp = ${usuario.actualExp};
 		var expTotal = ${usuario.totalExp};
+        var goalsJson = JSON.parse('${goalsJson}');
+        var usuarioJson = JSON.parse('${usuarioJson}');
+
 	</script>
 </body>
 </html>

@@ -1,5 +1,6 @@
 package luca.modic.project.controllers;
 
+import com.google.gson.Gson;
 import luca.modic.project.exceptions.*;
 import luca.modic.project.models.DatosLogin;
 import luca.modic.project.models.Goal;
@@ -93,22 +94,28 @@ public class ControladorLogin {
 		return new ModelAndView ("redirect:/login");
 	}
 
-
 	@RequestMapping(path = "/home", method = RequestMethod.GET)
 	public ModelAndView irAHome(HttpServletRequest request) {
 		if (request.getSession().getAttribute("usuario") == null)
 			return new ModelAndView("redirect:/login");
-		Usuario usuario = this.servicioUsuario.buscar((Long) request.getSession().getAttribute("id"));
-		List<Goal> goals = this.servicioGoal.getGoalsById(usuario.getId());
 		ModelMap model = new ModelMap();
+		Usuario usuario = this.servicioUsuario.buscar((Long) request.getSession().getAttribute("id"));
+		if(usuario.getActualHealth() <= 0 ){
+			model.put("errorDeath", "You died");
+			return new ModelAndView("death", model);
+		}
+		List<Goal> goals = this.servicioGoal.getGoalsById(usuario.getId());
+
+		//
+		model.put("goalsJson", new Gson().toJson(goals));
+		model.put("usuarioJson", new Gson().toJson(usuario));
+		//
+
 		model.put("goals", goals);
 		model.put("usuario", usuario);
 		model.put ("goal", new Goal());
 		return new ModelAndView("home", model);
 	}
-
-
-
 
 	@RequestMapping(path = "/", method = RequestMethod.GET)
 	public ModelAndView inicio() {

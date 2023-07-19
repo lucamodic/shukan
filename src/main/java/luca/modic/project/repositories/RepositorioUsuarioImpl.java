@@ -62,4 +62,9 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
 		return (Usuario) this.sessionFactory.getCurrentSession().createCriteria(Usuario.class)
 				.add(Restrictions.eq("id", id)).uniqueResult();
 	}
+
+	@Override
+	public void eliminar(Usuario usuario) {
+		this.sessionFactory.getCurrentSession().delete(this.buscar(usuario.getId()));
+	}
 }

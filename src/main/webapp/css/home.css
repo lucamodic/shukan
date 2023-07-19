@@ -80,7 +80,7 @@ input[type=number] {
 
 .vida-actual {
     height:25px;
-    width: 75%;
+    width: 5%;
     background-color: #D45A5A;
 }
 
@@ -99,7 +99,7 @@ input[type=number] {
 
 .nivel-actual {
     height:25px;
-    width: 75%;
+    width: 5%;
     background-color: #D45A5A;
 }
 
@@ -228,7 +228,7 @@ input[type=number] {
     font-size:21px;
 }
 
-#btn-save-task {
+.save {
     background-color: #604576;
     border:none;
     border-radius:15px;
@@ -239,7 +239,7 @@ input[type=number] {
     margin:3vh 0px 2.5vh 10px;
 }
 
-#btn-save-task:hover {
+.save:hover {
     cursor:pointer;
     background-color: #9473b0;
     transition:ease-in;
@@ -255,8 +255,7 @@ input[type=number] {
 }
 
 .goal-name {
-    margin: 1px 15px;
-    margin-bottom: 15px;
+    margin: 1px 10px 5px 10px;
 }
 .task-not-finished {
     text-decoration: 2px #f84545 line-through;
@@ -287,4 +286,96 @@ input[type=number] {
     overflow-y:scroll;
     overflow-wrap: break-word;
     word-wrap: break-word;
+}
+
+.dead {
+    background-color: #604576;
+    border:none;
+    border-radius:15px;
+    font-size:20px;
+    color:white;
+    margin:3vh 20px 1.7vh 10px;
+    padding:10px 15px;
+}
+
+.dead:hover {
+    cursor:pointer;
+    background-color: #9473b0;
+    transition:ease-in;
+    transition-duration: 0.3s;
+}
+
+.death-error {
+    font-size:18px;
+    margin-right:10px;
+    text-align: center;
+}
+
+.modal-death{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height:30vh;
+    width:18vw;
+}
+
+.accion {
+    background:none;
+    border:none;
+    height:30px;
+    width:30px;
+}
+
+.completar {
+    margin-left: 10px;
+}
+
+.completar-habit {
+    margin-left: 10px;
+}
+
+.borrar {
+    margin-right: 13px;
+}
+
+.goals {
+    display:flex;
+    align-items: center;
+}
+
+.container-goals {
+    display:flex;
+    align-items: center;
+    margin-bottom:10px;
+}
+
+.texto-goals {
+    overflow-y:hidden;
+    border-bottom:1px solid white;
+    margin: 0px 5px;
+}
+
+.icono {
+    width:30px;
+    height:30px;
+}
+
+.transitionModal{
+    height:30vh;
+    width:18vw;
+    transition: width 3s;
+}
+
+.title-error {
+    margin-top:10px;
+    font-size:20px;
+}
+
+.transition {
+    transition: width 3s;
+}
+
+.accion:hover {
+    cursor:pointer;
 }
