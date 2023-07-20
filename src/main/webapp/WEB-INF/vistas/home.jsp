@@ -15,6 +15,7 @@
 	var errorTask = "";
 	var errorHabit = "";
 	var errorMission = "";
+	var usuarioJson = JSON.parse('${usuarioJson}');
 </script>
 	<div class="rodeado">
 		<div class="columnas">
@@ -47,7 +48,7 @@
 				<div class="barras">
 					<div class="nivel-total divs-barras">
 						<div id="nivel-actual" class="nivel-actual divs-barras">
-							<h4 class="nivel-texto">${usuario.actualExp}/${usuario.totalExp}</h4>
+							<h4 class="nivel-texto"></h4>
 						</div>
 					</div>
 				</div>
@@ -191,6 +192,7 @@
 						</c:forEach>
 					</div>
 
+						<!-- FINISHED  HABITS -->
 
 						<h3 class="titulo titulo-card">Finished Habits</h3>
 						<div class="finished finished-habits">
@@ -289,6 +291,15 @@
 		</form:form>
 	</dialog>
 
+	<dialog class="modal-nivel modal">
+		<div class="nivel-title">
+			<h3>You have leveled up!</h3>
+			<h3>Congratulations!</h3>
+		</div>
+		<br>
+		<button class="close-nivel close">&#10006;</button>
+	</dialog>
+
 	<!-- JAVASCRIPT -->
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" ></script>
@@ -296,12 +307,7 @@
 	</script>
 	<script src="js/home.js" type="text/javascript"></script>
 	<script>
-		var vida = ${usuario.actualHealth};
-		var exp = ${usuario.actualExp};
-		var expTotal = ${usuario.totalExp};
         var goalsJson = JSON.parse('${goalsJson}');
-        var usuarioJson = JSON.parse('${usuarioJson}');
-
 	</script>
 </body>
 </html>

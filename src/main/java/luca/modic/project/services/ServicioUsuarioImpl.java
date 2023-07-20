@@ -41,7 +41,7 @@ public class ServicioUsuarioImpl implements ServicioUsuario{
             usuario.setActualHealth(100);
             usuario.setLevel(usuario.getLevel() + 1);
             usuario.setActualExp(usuario.getActualExp() - usuario.getTotalExp());
-            usuario.setTotalExp(usuario.getTotalExp() * 2);
+            usuario.setTotalExp(usuario.getTotalExp() * 3 / 2);
         }
     }
 

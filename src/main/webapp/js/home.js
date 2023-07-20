@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-
+    $(".nivel-texto").text( usuarioJson.actualExp + "/" + usuarioJson.totalExp);
 
     //allows showModal()
     $.fn.showModal = function() {
@@ -20,7 +20,7 @@ $(document).ready(function() {
         return el;
     };
 
-    $(".modal-death").hide();
+    $(".modal-nivel").hide();
 
     if(!(Object.keys(errorTask).length === 0)){
         $(".modal-tasks").showModal();
@@ -60,11 +60,15 @@ $(document).ready(function() {
         $(".modal-mission").close();
     })
 
+    $(".close-nivel").click(function(){
+        $(".modal-nivel").hide();
+    })
+
 
 
     setInterval(() => {
         $(function() {
-            if(usuarioJson.actualHealth >=5){
+            if(usuarioJson.actualHealth >= 5){
                 $("#vida-actual").addClass("transition");
                 $(".vida-actual").width(usuarioJson.actualHealth + "%");
             }
@@ -119,15 +123,14 @@ $(document).ready(function() {
                     goalsJson.forEach(element => {
                         if(element.id == idGoal){
                             usuarioJson.actualExp = usuarioJson.actualExp + element.experience;
-                            nivel();
-                            $(".nivel-actual").width(usuarioJson.actualExp * 100 / usuarioJson.totalExp + "%");
-                            $(".nivel-texto").text(usuarioJson.actualExp + "/" + usuarioJson.totalExp);
+                            levelUp(usuarioJson.actualExp, usuarioJson.totalExp);
+                            $(".nivel-texto").text( usuarioJson.actualExp + "/" + usuarioJson.totalExp);
                             $("#" + idGoal).addClass("task-finished")
                             var html = $("#" + idGoal).outerHTML();
                             $("."+ idGoal).remove();
                         }
-                        if(element.type == "MISSION"){
-                            $(".finished-missions").append(html);
+                        if(element.type === "MISSION"){
+                            $(".finished-mission").append(html);
                         }
                         else {
                             $(".finished-tasks").append(html);
@@ -155,6 +158,12 @@ $(document).ready(function() {
                 goalsJson.forEach(element => {
                         if(element.id == idGoal){
                             usuarioJson.actualExp = usuarioJson.actualExp + element.experience;
+                            if(usuarioJson.actualExp >= usuarioJson.totalExp){
+                                usuarioJson.actualExp = usuarioJson.actualExp - usuarioJson.totalExp;
+                                usuarioJson.totalExp = usuarioJson.totalExp*3/2;
+                                usuarioJson.level += 1;
+                                $(".modal-nivel").showModal();
+                            }
                             nivel();
                             $(".nivel-actual").width(usuarioJson.actualExp * 100 / usuarioJson.totalExp + "%");
                             $(".nivel-texto").text(usuarioJson.actualExp + "/" + usuarioJson.totalExp);
@@ -186,4 +195,22 @@ $(document).ready(function() {
         $(this).attr('src', "images/trash.png");
     });
 
+    function levelUp(a, b) {
+        if (a >= b) {
+            $(".nivel-actual").animate({
+                width: '100%',
+            },0)
+            setTimeout(function() {
+                $(".modal-nivel").show()
+                usuarioJson.actualExp = a - b
+                usuarioJson.totalExp = Math.floor(b * 3 / 2)
+                usuarioJson.level += 1
+                $(".modal-nivel").show()
+                $(".nivel-actual").animate({
+                    width: usuarioJson.actualExp * 100 / usuarioJson.totalExp + '%',
+                },0)
+            }, 4000);
+
+        }
+    }
 });

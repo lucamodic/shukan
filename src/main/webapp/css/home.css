@@ -379,3 +379,19 @@ input[type=number] {
 .accion:hover {
     cursor:pointer;
 }
+
+.modal-nivel{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height:19vh;
+    width:15vw;
+}
+
+.nivel-title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
