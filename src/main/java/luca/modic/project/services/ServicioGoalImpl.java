@@ -127,12 +127,13 @@ public class ServicioGoalImpl implements ServicioGoal{
     }
 
     @Override
-    @Scheduled (cron = "0 * * * * *")
+    @Scheduled (cron = "* * * * * *")
     public void habitTime(){
         List<UsuarioGoal> list = repositorioUsuarioGoal.getAllHabits();
         LocalDate now = LocalDate.now();
         for(UsuarioGoal usuarioGoal : list){
             if(now.isAfter(usuarioGoal.getFinishingDate()) && !usuarioGoal.getGoal().getHecho()){
+                System.out.println("-----------------------------------------------------------------");
                 Usuario usuario = usuarioGoal.getUsuario();
                 usuario.setActualHealth(usuario.getActualHealth() - usuarioGoal.getGoal().getDamage());
                 usuario.setStreak(0);

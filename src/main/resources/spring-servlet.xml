@@ -18,6 +18,11 @@
         <property name="suffix" value=".jsp" />
         <!--De esta manera al devolver home como nombre de vista, resuelve /WEB-INF/vistas/home.jsp-->
     </bean>
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="10000000" />
+    </bean>
+
 
     <!--Excluye de las URL validas para Spring MVC los recursos estaticos de la aplicacion Web: estilos, java script y fuentes-->
     <!--Si se agregaran, por ejemplo, imagenes, es; es necesario agregar ese path aca-->

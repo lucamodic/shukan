@@ -11,9 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -49,7 +51,7 @@ public class ControladorHome {
             model.put("errorTask", e.getMessage());
             return new ModelAndView("home", model);
         }
-        return new ModelAndView("redirect:/home", model);
+        return new ModelAndView("home", model);
     }
 
     @RequestMapping(path = "/save-mission", method = RequestMethod.POST)
@@ -72,7 +74,7 @@ public class ControladorHome {
             model.put("errorMission", e.getMessage());
             return new ModelAndView("home", model);
         }
-        return new ModelAndView("redirect:/home", model);
+        return new ModelAndView("home", model);
     }
 
     @RequestMapping(path = "/save-habit", method = RequestMethod.POST)
@@ -95,7 +97,7 @@ public class ControladorHome {
             model.put("errorHabit", e.getMessage());
             return new ModelAndView("home", model);
         }
-        return new ModelAndView("redirect:/home", model);
+        return new ModelAndView("home", model);
     }
 
 
@@ -149,5 +151,17 @@ public class ControladorHome {
         }
         return new ModelAndView("death", model);
     }
+
+    @RequestMapping(path = "/cambiar-foto-perfil", method = RequestMethod.POST)
+    @ResponseBody
+    public Boolean cambiarFotoPerfil(@RequestParam MultipartFile fotoPerfil, HttpServletRequest request) {
+        try {
+            this.servicioUsuario.cambiarFotoPerfil(fotoPerfil, (Long) request.getSession().getAttribute("id"));
+            return true;
+        } catch (IOException ex) {
+            return false;
+        }
+    }
+
 
 }

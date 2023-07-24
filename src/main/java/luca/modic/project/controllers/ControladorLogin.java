@@ -94,7 +94,7 @@ public class ControladorLogin {
 		return new ModelAndView ("redirect:/login");
 	}
 
-	@RequestMapping(path = "/home", method = RequestMethod.GET)
+	@RequestMapping(path = "/home", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView irAHome(HttpServletRequest request) {
 		if (request.getSession().getAttribute("usuario") == null)
 			return new ModelAndView("redirect:/login");

@@ -17,7 +17,7 @@ public class Usuario {
 	private String usuario;
 	private String email;
 	private String password;
-	private String fotoPerfil = "images/default.jpg";
+	private String fotoPerfil;
 	private Integer totalHealth = 100;
 	private Integer actualHealth = 100;
 	private Integer totalExp = 100;

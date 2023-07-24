@@ -1,7 +1,9 @@
 $(document).ready(function() {
 
     $(".nivel-texto").text( usuarioJson.actualExp + "/" + usuarioJson.totalExp);
-
+    if (window.location.href.indexOf("save") > -1) {
+        window.location.href = "home";
+    }
     //allows showModal()
     $.fn.showModal = function() {
         el = $(this);
@@ -156,22 +158,15 @@ $(document).ready(function() {
             },*/
             success: result => {
                 goalsJson.forEach(element => {
-                        if(element.id == idGoal){
-                            usuarioJson.actualExp = usuarioJson.actualExp + element.experience;
-                            if(usuarioJson.actualExp >= usuarioJson.totalExp){
-                                usuarioJson.actualExp = usuarioJson.actualExp - usuarioJson.totalExp;
-                                usuarioJson.totalExp = usuarioJson.totalExp*3/2;
-                                usuarioJson.level += 1;
-                                $(".modal-nivel").showModal();
-                            }
-                            nivel();
-                            $(".nivel-actual").width(usuarioJson.actualExp * 100 / usuarioJson.totalExp + "%");
-                            $(".nivel-texto").text(usuarioJson.actualExp + "/" + usuarioJson.totalExp);
-                            $("#" + idGoal).addClass("task-finished")
-                            var html = $("#" + idGoal).outerHTML();
-                            $('.' + idGoal).remove();
-                            $(".finished-habits").append(html);
-                        }
+                    if(element.id == idGoal){
+                        usuarioJson.actualExp = usuarioJson.actualExp + element.experience;
+                        levelUp(usuarioJson.actualExp, usuarioJson.totalExp);
+                        $(".nivel-texto").text( usuarioJson.actualExp + "/" + usuarioJson.totalExp);
+                        $("#" + idGoal).addClass("task-finished")
+                        var html = $("#" + idGoal).outerHTML();
+                        $("."+ idGoal).remove();
+                        $(".finished-habits").append(html);
+                    }
                 })
             }
             /*error: function(err){
@@ -209,8 +204,35 @@ $(document).ready(function() {
                 $(".nivel-actual").animate({
                     width: usuarioJson.actualExp * 100 / usuarioJson.totalExp + '%',
                 },0)
+                $(".nivel-texto").text( usuarioJson.actualExp + "/" + usuarioJson.totalExp);
             }, 4000);
 
         }
     }
+    $(document).on('click', '#imgPerfil', function() {
+        $('#fotoPerfil').click();
+    });
+
+    $(document).on('change', '#fotoPerfil', function() {
+        var formData = new FormData($('.cambiar-foto-perfil')[0]);
+        $.ajax({
+            url: 'cambiar-foto-perfil',
+            type: 'POST',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: (result) => {
+                if (result) {
+                    var url = URL.createObjectURL(this.files[0])
+                    $('#imgPerfil').prop('src', url);
+                } else {
+                    alert('Error al cambiar la foto de perfil');
+                }
+            }
+            /*error: function(err){
+            }*/
+        });
+    });
+
 });
+

@@ -24,9 +24,34 @@
 
 			<div class="parte-arriba p1">
 				<h3 class="titulo username">${usuario.usuario}</h3>
-				<button class="pfp">
+
+                <!--
+                <button class="pfp">
+                    <input type="file" id="fotoPerfil" name="fotoPerfil"
+                           accept="image/*" />
 					<img src="${usuario.fotoPerfil}" class="imagenPf"/>
 				</button>
+				-->
+				<form class="cambiar-foto-perfil" method="POST"
+					  enctype="multipart/form-data">
+					<div class="boxFoto">
+						<div class="perfil">
+							<c:choose>
+								<c:when test="${not empty usuario.fotoPerfil}">
+									<img id="imgPerfil" class="imagenPerfil"
+										 src="<c:url value="/images/fotosPerfil/${usuario.fotoPerfil}"/>">
+								</c:when>
+								<c:otherwise>
+									<img id="imgPerfil" class="imagenPerfil"
+										 src="<c:url value="/images/fotosPerfil/default.jpg"/>">
+								</c:otherwise>
+							</c:choose>
+							<br> <input type="file" id="fotoPerfil" name="fotoPerfil"
+										accept="image/*" />
+						</div>
+					</div>
+				</form>
+
 			</div>
 
 			<!-- VIDA -->
