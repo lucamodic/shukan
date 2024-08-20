@@ -38,7 +38,7 @@ public class ServicioGoalImpl implements ServicioGoal{
     @Override
     public void guardarTask(Goal goal, Usuario usuario) throws CampoVacioException, DurationLessThanSeven {
         if(this.verificarCamposRequeridos(goal)){
-            throw new CampoVacioException("All fields must be filled!!!!");
+            throw new CampoVacioException("All fields must be filled!");
         }
         if( goal.getLimitDate() > 7 || goal.getLimitDate() <= 0){
             throw new DurationLessThanSeven("The duration of the task must be less or equal to seven days but not less than 1");
